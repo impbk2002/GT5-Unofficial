@@ -860,5 +860,14 @@ public class GT_MetaTileEntity_BasicMachine_GT_Recipe extends GT_MetaTileEntity_
         return !this.mSharedTank;
     }
 
+    public boolean isItemValidForSlot(int slotID, ItemStack itemstack) {
+    	if(this.mRecipes == GT_Recipe.GT_Recipe_Map.sExtractorRecipes) {
+        	if(super.isItemValidForSlot(slotID, itemstack) && slotID >= getInputSlot() && slotID < getOutputSlot()) {
+            		return this.getRecipeList().containsInput(itemstack);
+        	}
+    	}
+    	return super.isItemValidForSlot(slotID, itemstack);
+    }
+    
     public enum X {PUMP, WIRE, WIRE4, HULL, PIPE, GLASS, PLATE, MOTOR, ROTOR, SENSOR, PISTON, CIRCUIT, EMITTER, CONVEYOR, ROBOT_ARM, COIL_HEATING, COIL_ELECTRIC, STICK_MAGNETIC, STICK_DISTILLATION, BETTER_CIRCUIT, FIELD_GENERATOR, COIL_HEATING_DOUBLE, STICK_ELECTROMAGNETIC}
 }

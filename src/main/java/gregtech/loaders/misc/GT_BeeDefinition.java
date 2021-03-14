@@ -2541,7 +2541,7 @@ public enum GT_BeeDefinition implements IBeeDefinition {
     ),
     INFINITYCATALYST(GT_BranchDefinition.PLANET, "InfinityCatalyst", false, new Color(0xFFFFFF), new Color(0xFFFFFF),
             beeSpecies -> {
-                beeSpecies.addProduct(GT_Bees.combs.getStackForType(CombType.INFINITYCATALYST), 0.0000005f);
+                beeSpecies.addProduct(GT_Bees.combs.getStackForType(CombType.INFINITYCATALYST), 0.005f);
                 beeSpecies.setHumidity(DAMP);
                 beeSpecies.setTemperature(HELLISH);
                 beeSpecies.setNocturnal();
@@ -2559,7 +2559,7 @@ public enum GT_BeeDefinition implements IBeeDefinition {
     ),
     INFINITY(GT_BranchDefinition.PLANET, "Infinity", false, new Color(0xFFFFFF), new Color(0xFFFFFF),
             beeSpecies -> {
-                beeSpecies.addProduct(GT_Bees.combs.getStackForType(CombType.INFINITY), 0.00000005f);
+                beeSpecies.addProduct(GT_Bees.combs.getStackForType(CombType.INFINITY), 0.0005f);
                 beeSpecies.setHumidity(EnumHumidity.NORMAL);
                 beeSpecies.setTemperature(ICY);
                 beeSpecies.setNocturnal();
