@@ -89,6 +89,7 @@ repositories {
 dependencies {
     //Hard dep to start (Without this, it wont compile nor start)
     compile "net.industrial-craft:industrialcraft-2:${config.ic2.version}:dev"
+    compile fileTree(dir: 'libs', include: '*.jar')
 
     //Hard dep to compile (Without this, it wont compile, not even as library)
     api "appeng:appliedenergistics2:${config.ae2.version}:dev"
@@ -106,8 +107,8 @@ dependencies {
     compileOnly "tconstruct:TConstruct:${config.minecraft.version}-${config.tconstruct.version}:deobf"
 	compileOnly "codechicken:Translocator:${config.minecraft.version}-${config.translocators.version}:dev"
     compileOnly "net.sengir.forestry:forestry_${config.minecraft.version}:${config.forestry.version}:dev"
-    compileOnly files("libs/Galacticraft-API-1.7-${config.gc.version}.jar")
-    compileOnly files("libs/GalacticraftCore-Dev-${config.gc.version}.jar")
+    //compileOnly files("libs/Galacticraft-API-1.7-${config.gc.version}.jar")
+    //compileOnly files("libs/GalacticraftCore-Dev-${config.gc.version}.jar")
     compileOnly name: "Galacticraft-API", version: config.gc.version, ext: 'jar'
     compileOnly name: "GalacticraftCore-Dev", version: config.gc.version, ext: 'jar'
     compileOnly name: 'CoFHLib', version: config.cofhlib.version, ext: 'jar'

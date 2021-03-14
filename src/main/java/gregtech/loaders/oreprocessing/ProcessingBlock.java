@@ -18,7 +18,7 @@ public class ProcessingBlock implements gregtech.api.interfaces.IOreRecipeRegist
         ItemStack tStack1 = GT_OreDictUnificator.get(OrePrefixes.ingot, aMaterial, 1L);
         ItemStack tStack2 = GT_OreDictUnificator.get(OrePrefixes.gem, aMaterial, 1L);
         ItemStack tStack3 = GT_OreDictUnificator.get(OrePrefixes.dust, aMaterial, 1L);
-
+        /*
         GT_ModHandler.removeRecipeDelayed(GT_Utility.copyAmount(1L, aStack));
 
         if (tStack1 != null)
@@ -28,6 +28,7 @@ public class ProcessingBlock implements gregtech.api.interfaces.IOreRecipeRegist
         if (tStack3 != null) {
             GT_ModHandler.removeRecipeDelayed(tStack3, tStack3, tStack3, tStack3, tStack3, tStack3, tStack3, tStack3, tStack3);
         }
+        */
         if (aMaterial.mStandardMoltenFluid != null) {
             if (!(aMaterial == Materials.AnnealedCopper || aMaterial == Materials.WroughtIron)) {
             GT_Values.RA.addFluidSolidifierRecipe(ItemList.Shape_Mold_Block.get(0L), aMaterial.getMolten(1296L), GT_OreDictUnificator.get(OrePrefixes.block, aMaterial, 1L), 288, 8);
