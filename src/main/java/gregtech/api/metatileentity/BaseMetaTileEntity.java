@@ -933,7 +933,6 @@ public class BaseMetaTileEntity extends BaseTileEntity implements IGregTechTileE
             mMetaTileEntity.setBaseMetaTileEntity(null);
         }
         super.invalidate();
-
     }
 
     @Override

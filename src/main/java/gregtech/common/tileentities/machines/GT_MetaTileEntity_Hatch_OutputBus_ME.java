@@ -59,7 +59,6 @@ public class GT_MetaTileEntity_Hatch_OutputBus_ME extends GT_MetaTileEntity_Hatc
         super.onFirstTick(aBaseMetaTileEntity);
         getProxy();
     }
-    
     @Optional.Method(modid = "appliedenergistics2")
     public int store(final ItemStack stack) {
         if (stack == null)
