@@ -33,7 +33,7 @@ public class ProcessingBlock implements gregtech.api.interfaces.IOreRecipeRegist
             GT_Values.RA.addFluidSolidifierRecipe(ItemList.Shape_Mold_Block.get(0L), aMaterial.getMolten(1296L), GT_OreDictUnificator.get(OrePrefixes.block, aMaterial, 1L), 288, 8);
             }
         }
-        if (GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.storageblockcrafting, OrePrefixes.block.get(aMaterial).toString(), false)) {
+        if (GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.storageblockcrafting, OrePrefixes.block.get(aMaterial).toString(), true)) {
             if ((tStack1 == null) && (tStack2 == null) && (tStack3 != null))
                 GT_ModHandler.addCraftingRecipe(GT_OreDictUnificator.get(OrePrefixes.block, aMaterial, 1L), new Object[]{"XXX", "XXX", "XXX", 'X', OrePrefixes.dust.get(aMaterial)});
             if (tStack2 != null)
@@ -49,7 +49,7 @@ public class ProcessingBlock implements gregtech.api.interfaces.IOreRecipeRegist
         }
         GT_Values.RA.addForgeHammerRecipe(aStack, tStack2, 100, 24);
 
-        if (GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.storageblockdecrafting, OrePrefixes.block.get(aMaterial).toString(), tStack2 != null)) {
+        if (GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.storageblockdecrafting, OrePrefixes.block.get(aMaterial).toString(), tStack2 != null || true)) {
             if (tStack3 != null)
                 GT_ModHandler.addShapelessCraftingRecipe(tStack3, new Object[]{OrePrefixes.block.get(aMaterial)});
             if (tStack2 != null)

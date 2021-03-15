@@ -17,7 +17,7 @@ public enum CombType {
     ENERGY("energy", true, Materials._NULL, 80,0xC11F1F, 0xEBB9B9),
     LAPOTRON("lapotron", true, Materials._NULL, 60,0x1414FF, 0x6478FF),
     PYROTHEUM("pyrotheum", true, Materials.Pyrotheum, 50,0xffebc4, 0xe36400),
-    CRYOTHEUM("cryotheum", true, Materials.Pyrotheum, 50,0x2660ff, 0x5af7ff),
+    CRYOTHEUM("cryotheum", true, Materials.Cryotheum, 50,0x2660ff, 0x5af7ff),
 
     //Alloy Line
     REDALLOY("redalloy", true, Materials.RedAlloy, 100,0xE60000, 0xB80000),
@@ -144,9 +144,9 @@ public enum CombType {
     VEGA("vega",true, Materials._NULL, 10,0x1A2036, 0xB5C0DE),
 
     //Infinity
-    COSMICNEUTRONIUM("cosmicneutronium",true, Materials._NULL, 5,0x484848, 0x323232),
-    INFINITYCATALYST("infinitycatalyst",true, Materials._NULL, 2,0xFFFFFF, 0xFFFFFF),
-    INFINITY("infinity",true, Materials._NULL, 1,0xFFFFFF, 0xFFFFFF),
+    COSMICNEUTRONIUM("cosmicneutronium",true, Materials.CosmicNeutronium, 5,0x484848, 0x323232),
+    INFINITYCATALYST("infinitycatalyst",true, Materials.InfinityCatalyst, 2,0xFFFFFF, 0xFFFFFF),
+    INFINITY("infinity",true, Materials.Infinity, 1,0xFFFFFF, 0xFFFFFF),
 
     //HEE
     ENDDUST("enddust", true, Materials._NULL, 50,0x003A7D, 0xCC00FA),

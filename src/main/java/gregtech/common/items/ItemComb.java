@@ -106,7 +106,7 @@ public class ItemComb extends Item {
 	}
 	public void initCombsRecipes() {
 
-	    //Organic
+    //Organic
 		addProcessGT(CombType.LIGNIE, new Materials[] {Materials.Lignite}, Voltage.LV);
 		addProcessGT(CombType.COAL, new Materials[] {Materials.Coal}, Voltage.LV);
 		addCentrifugeToItemStack(CombType.STICKY, new ItemStack[] { ItemList.IC2_Resin.get(1), ItemList.IC2_Plantball.get(1), ItemList.FR_Wax.get(1) }, new int[] {50 * 100, 15 * 100, 50 * 100}, Voltage.ULV);
@@ -405,19 +405,24 @@ public class ItemComb extends Item {
 		addCentrifugeToItemStack(CombType.VEGA, new ItemStack[] {ItemList.FR_Wax.get(1L), GT_ModHandler.getModItem("dreamcraft", "item.VegaBStoneDust", 1L, 0)}, new int[]{50 * 100, 30 * 100 }, Voltage.ZPM);
 
 		//Infinity Line
-		ItemStack tComb;
-		tComb = getStackForType(CombType.COSMICNEUTRONIUM);
-		RA.addCentrifugeRecipe(tComb, NI, NF, NF, ItemList.FR_Wax.get(1L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.CosmicNeutronium, 1L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Neutronium, 1L), NI, NI, NI, new int[]{5000, 50, 100, 0, 0, 0}, 12000, Voltage.UHV.getSimpleEnergy());
-		tComb = getStackForType(CombType.INFINITYCATALYST);
-		RA.addCentrifugeRecipe(tComb, NI, NF, NF, ItemList.FR_Wax.get(1L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfinityCatalyst, 1L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Neutronium, 1L), NI, NI, NI, new int[]{5000, 5, 100, 0, 0, 0}, 48000, Voltage.UEV.getSimpleEnergy());
-		tComb = getStackForType(CombType.INFINITY);
-		RA.addCentrifugeRecipe(tComb, NI, NF, NF, ItemList.FR_Wax.get(1L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Infinity, 1L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfinityCatalyst, 1L), NI, NI, NI, new int[]{5000, 1, 5, 0, 0, 0}, 96000, Voltage.UIV.getSimpleEnergy());
-		/**
-		
 		addCentrifugeToMaterial(CombType.COSMICNEUTRONIUM, new Materials[] {Materials.CosmicNeutronium, Materials.Neutronium}, new int[] {(int) (0.5 * 100), 1 * 100}, new int[] {}, Voltage.UHV, NI, 50 * 100);
 		addCentrifugeToMaterial(CombType.INFINITYCATALYST, new Materials[] {Materials.InfinityCatalyst, Materials.Neutronium}, new int[] {(int) (0.05 * 100), 1 * 100}, new int[] {}, Voltage.UEV, NI, 50 * 100);
 		addCentrifugeToMaterial(CombType.INFINITY, new Materials[] {Materials.Infinity, Materials.InfinityCatalyst}, new int[] {(int) (0.01 * 100), (int) (0.05 * 100)}, new int[] {}, Voltage.UIV, NI, 50 * 100);
-		 * */
+
+		/*
+    ItemStack tComb;
+		tComb = getStackForType(CombType.COSMICNEUTRONIUM);
+		GT_Values.RA.addCentrifugeRecipe(tComb, GT_Values.NI, GT_Values.NF, GT_Values.NF, ItemList.FR_Wax.get(1L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.CosmicNeutronium, 1L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Neutronium, 1L), GT_Values.NI, GT_Values.NI, GT_Values.NI, new int[]{5000, 50, 100, 0, 0, 0}, 12000, Voltage.UHV.getSimpleEnergy());
+		tComb = getStackForType(CombType.INFINITYCATALYST);
+		GT_Values.RA.addCentrifugeRecipe(tComb, GT_Values.NI, GT_Values.NF, GT_Values.NF, ItemList.FR_Wax.get(1L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfinityCatalyst, 1L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Neutronium, 1L), GT_Values.NI, GT_Values.NI, GT_Values.NI, new int[]{5000, 5, 100, 0, 0, 0}, 48000, Voltage.UEV.getSimpleEnergy());
+		tComb = getStackForType(CombType.INFINITY);
+		GT_Values.RA.addCentrifugeRecipe(tComb, GT_Values.NI, GT_Values.NF, GT_Values.NF, ItemList.FR_Wax.get(1L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Infinity, 1L), GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfinityCatalyst, 1L), GT_Values.NI, GT_Values.NI, GT_Values.NI, new int[]{5000, 1, 5, 0, 0, 0}, 96000, Voltage.UIV.getSimpleEnergy());
+		if(!GT_Mod.gregtechproxy.mNerfedCombs) {
+			RecipeManagers.centrifugeManager.addRecipe(40, getStackForType(CombType.COSMICNEUTRONIUM), ImmutableMap.of(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.CosmicNeutronium, 1L), 0.005f, GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Neutronium, 1L), 0.01f, ItemList.FR_Wax.get(1), 0.5f));
+			RecipeManagers.centrifugeManager.addRecipe(40, getStackForType(CombType.INFINITYCATALYST), ImmutableMap.of(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfinityCatalyst, 1L), 0.005f, GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Neutronium, 1L), 0.01f, ItemList.FR_Wax.get(1), 0.5f));
+			RecipeManagers.centrifugeManager.addRecipe(40, getStackForType(CombType.INFINITY), ImmutableMap.of(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Infinity, 1L), 0.005f, GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfinityCatalyst, 1L), 0.01f, ItemList.FR_Wax.get(1), 0.5f));
+		}
+		*/
 	}
 	
 	/**
@@ -501,7 +506,8 @@ public class ItemComb extends Item {
 			if(aItem[i] == NI) { continue; }
 				Product.put(aItem[i],chance[i]/10000.0f);
 		}
-		if(volt.compareTo(Voltage.MV) < 0) {
+
+		if(volt.compareTo(Voltage.MV) < 0 || !GT_Mod.gregtechproxy.mNerfedCombs) {
 			RecipeManagers.centrifugeManager.addRecipe(40, tComb, Product.build());
 		}
 		

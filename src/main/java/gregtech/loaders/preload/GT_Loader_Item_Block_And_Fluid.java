@@ -1,6 +1,7 @@
 package gregtech.loaders.preload;
 
 import codechicken.nei.api.API;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.GT_Mod;
@@ -774,6 +775,90 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             //FluidContainerRegistry.registerFluidContainer(new FluidContainerRegistry.FluidContainerData(Materials.Naquadria.getMolten(1000L), GT_OreDictUnificator.get(OrePrefixes.cell, Materials.Naquadria, 1L), GT_OreDictUnificator.get(OrePrefixes.cell, Materials.Empty, 1L)));
 
             GregTech_API.registerMachineBlock(GT_Utility.getBlockFromStack(GT_ModHandler.getIC2Item("reinforcedGlass", 0)), 0);
+            
+            
+            if(Loader.isModLoaded("RotaryCraft")) {
+                if (GregTech_API.sUnification.get(ConfigCategories.specialunificationtargets + "." + "RotaryCraft", "ingotHSLA", true)) {
+                    GT_OreDictUnificator.set(OrePrefixes.ingot, Materials.HSLA, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_shaftcraft", 1L, 1));
+                } else {
+                    GT_OreDictUnificator.set(OrePrefixes.ingot, Materials.HSLA, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_shaftcraft", 1L, 1), false, false);
+                }
+                
+                if (GregTech_API.sUnification.get(ConfigCategories.specialunificationtargets + "." + "RotaryCraft", "ingotTungsten", true)) {
+                    GT_OreDictUnificator.set(OrePrefixes.ingot, Materials.Tungsten, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_compacts", 1L, 5));
+                } else {
+                    GT_OreDictUnificator.set(OrePrefixes.ingot, Materials.Tungsten, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_compacts", 1L, 5), false, false);
+                }
+                
+                if (GregTech_API.sUnification.get(ConfigCategories.specialunificationtargets + "." + "RotaryCraft", "itemSilicon", true)) {
+                    GT_OreDictUnificator.set(OrePrefixes.item, Materials.Silicon, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_compacts", 1L, 10));
+                } else {
+                    GT_OreDictUnificator.set(OrePrefixes.item, Materials.Silicon, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_compacts", 1L, 10), false, false);
+                }
+                
+                if (GregTech_API.sUnification.get(ConfigCategories.specialunificationtargets + "." + "RotaryCraft", "dustCoal", true)) {
+                    GT_OreDictUnificator.set(OrePrefixes.dust, Materials.Coal, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_powders", 1L, 10));
+                } else {
+                    GT_OreDictUnificator.set(OrePrefixes.dust, Materials.Coal, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_powders", 1L, 10), false, false);
+                }
+                
+                if (GregTech_API.sUnification.get(ConfigCategories.specialunificationtargets + "." + "RotaryCraft", "dustImpureNetherrack", true)) {
+                    GT_OreDictUnificator.set(OrePrefixes.dustImpure, Materials.Netherrack, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_powders", 1L, 0));
+                } else {
+                    GT_OreDictUnificator.set(OrePrefixes.dustImpure, Materials.Netherrack, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_powders", 1L, 0), false, false);
+                }
+                
+                if (GregTech_API.sUnification.get(ConfigCategories.specialunificationtargets + "." + "RotaryCraft", "dustAluminium", true)) {
+                    GT_OreDictUnificator.set(OrePrefixes.dust, Materials.Aluminium, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_powders", 1L, 8));
+                } else {
+                    GT_OreDictUnificator.set(OrePrefixes.dust, Materials.Aluminium, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_powders", 1L, 8), false, false);
+                }
+                
+                if (GregTech_API.sUnification.get(ConfigCategories.specialunificationtargets + "." + "RotaryCraft", "dustSilicon", true)) {
+                    GT_OreDictUnificator.set(OrePrefixes.dust, Materials.Silicon, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_powders", 1L, 14));
+                } else {
+                    GT_OreDictUnificator.set(OrePrefixes.dust, Materials.Silicon, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_powders", 1L, 14), false, false);
+                }
+                
+                if (GregTech_API.sUnification.get(ConfigCategories.specialunificationtargets + "." + "RotaryCraft", "dustTungsten", true)) {
+                    GT_OreDictUnificator.set(OrePrefixes.dust, Materials.Tungsten, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_extracts", 1L, 33));
+                } else {
+                    GT_OreDictUnificator.set(OrePrefixes.dust, Materials.Tungsten, GT_ModHandler.getModItem("RotaryCraft", "rotarycraft_item_extracts", 1L, 33), false, false);
+                }
+            }
+
+            if(Loader.isModLoaded("ReactorCraft")) {
+                if (GregTech_API.sUnification.get(ConfigCategories.specialunificationtargets + "." + "ReactorCraft", "ingotTungstenCarbide", true)) {
+                    GT_OreDictUnificator.set(OrePrefixes.ingot, Materials.TungstenCarbide, GT_ModHandler.getModItem("ReactorCraft", "reactorcraft_item_crafting", 1L, 17));
+                } else {
+                    GT_OreDictUnificator.set(OrePrefixes.ingot, Materials.TungstenCarbide, GT_ModHandler.getModItem("ReactorCraft", "reactorcraft_item_crafting", 1L, 17), false, false);
+                }
+                
+                if (GregTech_API.sUnification.get(ConfigCategories.specialunificationtargets + "." + "ReactorCraft", "dustUranium", true)) {
+                    GT_OreDictUnificator.set(OrePrefixes.dust, Materials.Uranium, GT_ModHandler.getModItem("ReactorCraft", "reactorcraft_item_crafting", 1L, 14));
+                } else {
+                    GT_OreDictUnificator.set(OrePrefixes.dust, Materials.Uranium, GT_ModHandler.getModItem("ReactorCraft", "reactorcraft_item_crafting", 1L, 14), false, false);
+                }
+                
+                if (GregTech_API.sUnification.get(ConfigCategories.specialunificationtargets + "." + "ReactorCraft", "gemMagnetite", true)) {
+                    GT_OreDictUnificator.set(OrePrefixes.gem, Materials.Magnetite, GT_ModHandler.getModItem("ReactorCraft", "reactorcraft_item_raw", 1L, 6));
+                } else {
+                    GT_OreDictUnificator.set(OrePrefixes.gem, Materials.Magnetite, GT_ModHandler.getModItem("ReactorCraft", "reactorcraft_item_raw", 1L, 6), false, false);
+                }
+                
+                if (GregTech_API.sUnification.get(ConfigCategories.specialunificationtargets + "." + "ReactorCraft", "dustEmerald", true)) {
+                    GT_OreDictUnificator.set(OrePrefixes.dust, Materials.Emerald, GT_ModHandler.getModItem("ReactorCraft", "reactorcraft_item_raw", 1L, 8));
+                } else {
+                    GT_OreDictUnificator.set(OrePrefixes.dust, Materials.Emerald, GT_ModHandler.getModItem("ReactorCraft", "reactorcraft_item_raw", 1L, 8), false, false);
+                }
+                
+                if (GregTech_API.sUnification.get(ConfigCategories.specialunificationtargets + "." + "ReactorCraft", "ingotGraphite", true)) {
+                    GT_OreDictUnificator.set(OrePrefixes.ingot, Materials.Graphite, GT_ModHandler.getModItem("ReactorCraft", "reactorcraft_item_crafting", 1L, 13));
+                } else {
+                    GT_OreDictUnificator.set(OrePrefixes.ingot, Materials.Graphite, GT_ModHandler.getModItem("ReactorCraft", "reactorcraft_item_crafting", 1L, 13), false, false);
+                }
+            }
+            
         }
 }
 

@@ -11,6 +11,7 @@ import gregtech.api.objects.GT_RenderedTexture;
 import gregtech.api.util.GT_Recipe;
 import gregtech.api.util.GT_Utility;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 
 public class GT_MetaTileEntity_Extractor_Steel extends GT_MetaTileEntity_BasicMachine_Steel {
     public GT_MetaTileEntity_Extractor_Steel(int aID, String aName, String aNameRegional) {
@@ -85,5 +86,23 @@ public class GT_MetaTileEntity_Extractor_Steel extends GT_MetaTileEntity_BasicMa
 
     public ITexture[] getBottomFacingInactive(byte aColor) {
         return new ITexture[]{super.getBottomFacingInactive(aColor)[0], new GT_RenderedTexture(Textures.BlockIcons.OVERLAY_BOTTOM_STEAM_EXTRACTOR)};
+    }
+    
+    public boolean isItemValidForSlot(int slotID, ItemStack itemstack) {
+    	if(super.isItemValidForSlot(slotID, itemstack)) {
+    		if(slotID >= getInputSlot() && slotID < getOutputSlot()) {
+    	        GT_Recipe tRecipe = GT_Recipe.GT_Recipe_Map.sExtractorRecipes.findRecipe(getBaseMetaTileEntity(), false, gregtech.api.enums.GT_Values.V[2], null, itemstack);
+    	        if ((tRecipe != null) && (canOutput(tRecipe.mOutputs)) && (tRecipe.isRecipeInputEqual(false, null,itemstack))) {
+    	        	return true;
+    	        }else {
+    	        	return false;
+    	        }
+    	        
+    		}else {
+    			return true;
+    		}
+    	}else {
+    		return false;
+    	}
     }
 }
