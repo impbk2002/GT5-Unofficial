@@ -612,10 +612,12 @@ public class GT_ModHandler {
                 boolean aEnableTEMachineRecipes = GT_Mod.gregtechproxy.mTEMachineRecipes;
                 if (Materials.Wood.contains(aOutput1)) {
                     if (aEnableTEMachineRecipes && GregTech_API.sRecipeFile.get(ConfigCategories.Machines.pulverization, aInput, true)) {
-                        if (aOutput2 == null)
-                            ThermalExpansion.addSawmillRecipe(32000, GT_Utility.copy(aInput), GT_Utility.copy(aOutput1));
-                        else
-                            ThermalExpansion.addSawmillRecipe(32000, GT_Utility.copy(aInput), GT_Utility.copy(aOutput1), GT_Utility.copy(aOutput2), aChance2 <= 0 ? 10 : aChance2);
+                    	try {
+	                        if (aOutput2 == null)
+	                            ThermalExpansion.addSawmillRecipe(32000, GT_Utility.copy(aInput), GT_Utility.copy(aOutput1));
+	                        else
+	                            ThermalExpansion.addSawmillRecipe(32000, GT_Utility.copy(aInput), GT_Utility.copy(aOutput1), GT_Utility.copy(aOutput2), aChance2 <= 0 ? 10 : aChance2);
+                    	} catch (Throwable e) {/*Do nothing*/}
                     }
                 } else {
                     if (GregTech_API.sRecipeFile.get(ConfigCategories.Machines.rockcrushing, aInput, true)) {
@@ -631,10 +633,12 @@ public class GT_ModHandler {
                         } catch (Throwable e) {/*Do nothing*/}
                     }
                     if (aEnableTEMachineRecipes && GregTech_API.sRecipeFile.get(ConfigCategories.Machines.pulverization, aInput, true)) {
+                    	try {
                         if (aOutput2 == null)
                             ThermalExpansion.addPulverizerRecipe(32000, GT_Utility.copy(aInput), GT_Utility.copy(aOutput1));
                         else
                             ThermalExpansion.addPulverizerRecipe(32000, GT_Utility.copy(aInput), GT_Utility.copy(aOutput1), GT_Utility.copy(aOutput2), aChance2 <= 0 ? 10 : aChance2);
+                    	} catch (Throwable e) {/*Do nothing*/}
                     }
                 }
             }

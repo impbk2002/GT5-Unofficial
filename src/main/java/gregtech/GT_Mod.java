@@ -93,18 +93,14 @@ import static gregtech.api.enums.GT_Values.MOD_ID_FR;
                 " after:GalacticraftCore;" +
                 " after:GalacticraftMars;" +
                 " after:GalacticraftPlanets;" +
-                " after:ThermalExpansion|Transport;" +
-                " after:ThermalExpansion|Energy;" +
-                " after:ThermalExpansion|Factory;" +
-                " after:RedPowerCore;" +
-                " after:RedPowerBase;" +
-                " after:RedPowerMachine;" +
-                " after:RedPowerCompat;" +
-                " after:RedPowerWiring;" +
-                " after:RedPowerLogic;" +
-                " after:RedPowerLighting;" +
-                " after:RedPowerWorld;" +
-                " after:RedPowerControl;" +
+                " after:ProjRed|Core;" +
+                " after:ProjRed|Expansion;" +
+                " after:ProjRed|Compatibility;" +
+                " after:ProjRed|Integration;" +
+                " after:ProjRed|Fabrication;" +
+                " after:ProjRed|Illumination;" +
+                " after:ProjRed|Expansion;" +
+                " after:ProjRed|Transportation;" +
                 " after:UndergroundBiomes;" +
                 " after:TConstruct;" +
                 " after:Translocator;" + 
