@@ -507,7 +507,7 @@ public class ItemComb extends Item {
 			chance = Arrays.copyOf(chance, 6);
 		}
 
-		RA.addCentrifugeRecipe(tComb, NI, NF, NF, aItem[0], aItem[1], aItem[2], aItem[3], aItem[4], aItem[5], chance, duration, volt.getSimpleEnergy());
+		RA.addCentrifugeRecipe(tComb, NI, NF, NF, aItem[0], aItem[1], aItem[2], aItem[3], aItem[4], aItem[5], chance, GT_Mod.gregtechproxy.mNerfedCombs ? duration : volt.getSimpleTime(), volt.getSimpleEnergy());
 	}
 	
 	enum Voltage {
