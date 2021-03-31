@@ -90,13 +90,14 @@ public class GT_CraftingRecipeLoader implements Runnable {
                 GT_ModHandler.addCraftingRecipe(tStack, bits_no_remove_buffered | GT_ModHandler.RecipeBits.DELETE_ALL_OTHER_RECIPES, new Object[]{aTextIron2, aTextIron2, 'X', OrePrefixes.plate.get(Materials.Rubber)});
             }
         }
+        /*
         GT_ModHandler.removeRecipeByOutputDelayed(ItemList.Bottle_Empty.get(1L));
         GT_ModHandler.removeRecipeByOutputDelayed(ItemList.IC2_Spray_WeedEx.get(1L));
         GT_ModHandler.removeRecipeByOutputDelayed(GT_ModHandler.getIC2Item("reBattery", 1L));
         GT_ModHandler.removeRecipeByOutputDelayed(new ItemStack(Blocks.tnt));
         GT_ModHandler.removeRecipeByOutputDelayed(GT_ModHandler.getIC2Item("dynamite", 1L));
         GT_ModHandler.removeRecipeByOutputDelayed(GT_ModHandler.getIC2Item("industrialTnt", 1L));
-
+        
         GT_ModHandler.removeRecipeByOutputDelayed(GT_ModHandler.getModItem("Forestry", "stamps", 1L, 0));
         GT_ModHandler.removeRecipeByOutputDelayed(GT_ModHandler.getModItem("Forestry", "stamps", 1L, 1));
         GT_ModHandler.removeRecipeByOutputDelayed(GT_ModHandler.getModItem("Forestry", "stamps", 1L, 2));
@@ -109,7 +110,7 @@ public class GT_CraftingRecipeLoader implements Runnable {
         GT_ModHandler.removeRecipeByOutputDelayed(GT_ModHandler.getModItem("Forestry", "engine", 1L, 1));
         GT_ModHandler.removeRecipeByOutputDelayed(GT_ModHandler.getModItem("Forestry", "engine", 1L, 2));
         GT_ModHandler.removeRecipeByOutputDelayed(GT_ModHandler.getModItem("Forestry", "engine", 1L, 4));
-
+		*/
         ItemStack tStack = GT_ModHandler.removeRecipe(new ItemStack(Blocks.planks, 1, 0), null, null, new ItemStack(Blocks.planks, 1, 0));
         if (tStack != null) {
             GT_ModHandler.addCraftingRecipe(GT_Utility.copyAmount(GT_Mod.gregtechproxy.mNerfedWoodPlank ? tStack.stackSize : tStack.stackSize * 5 / 4, tStack), bits_no_remove_buffered, new Object[]{"s", "P", "P", 'P', OrePrefixes.plank.get(Materials.Wood)});
@@ -502,7 +503,7 @@ public class GT_CraftingRecipeLoader implements Runnable {
         GT_ModHandler.addShapelessCraftingRecipe(GT_OreDictUnificator.get(OrePrefixes.dust, Materials.IndiumGalliumPhosphide, 3L), bits_no_remove_buffered, new Object[]{OrePrefixes.dust.get(Materials.Indium), OrePrefixes.dust.get(Materials.Gallium), OrePrefixes.dust.get(Materials.Phosphorus)});
 
         GT_ModHandler.addShapelessCraftingRecipe(GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 5L), bits_no_remove_buffered, new Object[]{OrePrefixes.dust.get(Materials.Potassium), OrePrefixes.cell.get(Materials.Nitrogen), OrePrefixes.cell.get(Materials.Oxygen), OrePrefixes.cell.get(Materials.Oxygen), OrePrefixes.cell.get(Materials.Oxygen)});
-        GT_ModHandler.removeRecipeByOutputDelayed(GT_ModHandler.getIC2Item("carbonFiber", 1L));
+        //GT_ModHandler.removeRecipeByOutputDelayed(GT_ModHandler.getIC2Item("carbonFiber", 1L));
         
         if (GT_Mod.gregtechproxy.mDisableIC2Cables) {
 
@@ -575,19 +576,19 @@ public class GT_CraftingRecipeLoader implements Runnable {
             GT_ModHandler.addCraftingRecipe(Ic2Items.miningLaser.copy(), GT_ModHandler.RecipeBits.BUFFERED, new Object[]{"PPP", "GEC", "SBd", 'P', OrePrefixes.plate.get(Materials.Titanium), 'G', OrePrefixes.gemExquisite.get(Materials.Jasper), 'E', ItemList.Emitter_HV, 'C', OrePrefixes.circuit.get(Materials.Elite), 'S', OrePrefixes.screw.get(Materials.Titanium), 'B', new ItemStack(Ic2Items.chargingEnergyCrystal.copy().getItem(), 1, GT_Values.W)});
             GT_ModHandler.addCraftingRecipe(Ic2Items.miningLaser.copy(), GT_ModHandler.RecipeBits.BUFFERED, new Object[]{"PPP", "GEC", "SBd", 'P', OrePrefixes.plate.get(Materials.Titanium), 'G', OrePrefixes.gemExquisite.get(Materials.GarnetRed), 'E', ItemList.Emitter_HV, 'C', OrePrefixes.circuit.get(Materials.Elite), 'S', OrePrefixes.screw.get(Materials.Titanium), 'B', new ItemStack(Ic2Items.chargingEnergyCrystal.copy().getItem(), 1, GT_Values.W)});
         }
-        GT_ModHandler.removeRecipeDelayed(GT_ModHandler.getIC2Item("miningPipe", 8));
+        //GT_ModHandler.removeRecipeDelayed(GT_ModHandler.getIC2Item("miningPipe", 8));
         GT_ModHandler.addCraftingRecipe(GT_ModHandler.getIC2Item("miningPipe", 1), GT_ModHandler.RecipeBits.BUFFERED, new Object[]{"hPf", 'P', OrePrefixes.pipeSmall.get(Materials.Steel)});
         GT_Values.RA.addWiremillRecipe(GT_OreDictUnificator.get(OrePrefixes.pipeTiny, Materials.Steel, 1), GT_ModHandler.getIC2Item("miningPipe", 1), 200, 16);
 
         GT_ModHandler.addCraftingRecipe(GT_ModHandler.getIC2Item("luminator", 16L), bits_no_remove_buffered, new Object[]{"RTR", "GHG", "GGG", 'H', OrePrefixes.cell.get(Materials.Helium), 'T', OrePrefixes.ingot.get(Materials.Tin), 'R', OrePrefixes.ingot.get(Materials.AnyIron), 'G', new ItemStack(Blocks.glass, 1)});
         GT_ModHandler.addCraftingRecipe(GT_ModHandler.getIC2Item("luminator", 16L), bits_no_remove_buffered, new Object[]{"RTR", "GHG", "GGG", 'H', OrePrefixes.cell.get(Materials.Mercury), 'T', OrePrefixes.ingot.get(Materials.Tin), 'R', OrePrefixes.ingot.get(Materials.AnyIron), 'G', new ItemStack(Blocks.glass, 1)});
-
+        /*
         GT_ModHandler.removeRecipeDelayed(tStack = GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 1L), tStack, tStack, tStack, new ItemStack(Items.coal, 1, 0), tStack, tStack, tStack, tStack);
         GT_ModHandler.removeRecipeDelayed(tStack = GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 1L), tStack, tStack, tStack, new ItemStack(Items.coal, 1, 1), tStack, tStack, tStack, tStack);
         GT_ModHandler.removeRecipeDelayed(null, tStack = new ItemStack(Items.coal, 1), null, tStack, GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Iron, 1L), tStack, null, tStack, null);
 
         GT_ModHandler.removeFurnaceSmelting(new ItemStack(Blocks.hopper));
-
+        */
         
         GT_Log.out.println("GT_Mod: Applying harder Recipes for several Blocks.");  // TODO: Not Buffered
         
