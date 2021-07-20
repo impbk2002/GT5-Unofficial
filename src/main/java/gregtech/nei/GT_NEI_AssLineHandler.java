@@ -30,6 +30,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -56,18 +57,26 @@ public class GT_NEI_AssLineHandler extends TemplateRecipeHandler {
         }
     }
 
+    public List<GT_Recipe> getSortedRecipes() {
+        List<GT_Recipe> result = new ArrayList<>(this.mRecipeMap.mRecipeList);
+        Collections.sort(result);
+        return result;
+    }
+    
     public static void drawText(int aX, int aY, String aString, int aColor) {
         Minecraft.getMinecraft().fontRenderer.drawString(aString, aX, aY, aColor);
     }
 
+    @Override
     public TemplateRecipeHandler newInstance() {
         NEI_GT_Config.ALH=new GT_NEI_AssLineHandler(this.mRecipeMap);
         return NEI_GT_Config.ALH;
     }
 
+    @Override
     public void loadCraftingRecipes(String outputId, Object... results) {
         if (outputId.equals(getOverlayIdentifier())) {
-            for (GT_Recipe tRecipe : this.mRecipeMap.mRecipeList) {
+            for (GT_Recipe tRecipe : getSortedRecipes()) {
                 if (!tRecipe.mHidden) {
                     this.arecipes.add(new CachedDefaultRecipe(tRecipe));
                 }else{
@@ -79,6 +88,7 @@ public class GT_NEI_AssLineHandler extends TemplateRecipeHandler {
         }
     }
 
+    @Override
     public void loadCraftingRecipes(ItemStack aResult) {
         ItemData tPrefixMaterial = GT_OreDictUnificator.getAssociation(aResult);
 
@@ -95,11 +105,11 @@ public class GT_NEI_AssLineHandler extends TemplateRecipeHandler {
             tResults.add(GT_Utility.getFluidDisplayStack(tFluid, false));
             for (FluidContainerRegistry.FluidContainerData tData : FluidContainerRegistry.getRegisteredFluidContainerData()) {
                 if (tData.fluid.isFluidEqual(tFluid)) {
-                    tResults.add(GT_Utility.copy(tData.filledContainer));
+                    tResults.add(GT_Utility.copyOrNull(tData.filledContainer));
                 }
             }
         }
-        for (GT_Recipe tRecipe : this.mRecipeMap.mRecipeList) {
+        for (GT_Recipe tRecipe : getSortedRecipes()) {
             if (!tRecipe.mHidden) {
                 CachedDefaultRecipe tNEIRecipe = new CachedDefaultRecipe(tRecipe);
                 for (ItemStack tStack : tResults) {
@@ -120,6 +130,7 @@ public class GT_NEI_AssLineHandler extends TemplateRecipeHandler {
         }
     }
 
+    @Override
     public void loadUsageRecipes(ItemStack aInput) {
         ItemData tPrefixMaterial = GT_OreDictUnificator.getAssociation(aInput);
 
@@ -136,7 +147,7 @@ public class GT_NEI_AssLineHandler extends TemplateRecipeHandler {
             tInputs.add(GT_Utility.getFluidDisplayStack(tFluid, false));
             for (FluidContainerRegistry.FluidContainerData tData : FluidContainerRegistry.getRegisteredFluidContainerData()) {
                 if (tData.fluid.isFluidEqual(tFluid)) {
-                    tInputs.add(GT_Utility.copy(tData.filledContainer));
+                    tInputs.add(GT_Utility.copyOrNull(tData.filledContainer));
                 }
             }
         }
@@ -162,28 +173,34 @@ public class GT_NEI_AssLineHandler extends TemplateRecipeHandler {
         CachedDefaultRecipe tNEIRecipe;
     }
 
+    @Override
     public String getOverlayIdentifier() {
         return this.mRecipeMap.mNEIName;
     }
 
+    @Override
     public void drawBackground(int recipe) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GuiDraw.changeTexture(getGuiTexture());
         GuiDraw.drawTexturedModalRect(-4, -8, 1, 3, 174, 79);
     }
 
+    @Override
     public int recipiesPerPage() {
         return 1;
     }
 
+    @Override
     public String getRecipeName() {
         return GT_LanguageManager.getTranslation(this.mRecipeMap.mUnlocalizedName);
     }
 
+    @Override
     public String getGuiTexture() {
         return this.mRecipeMap.mNEIGUIPath;
     }
 
+    @Override
     public List<String> handleItemTooltip(GuiRecipe gui, ItemStack aStack, List<String> currenttip, int aRecipeIndex) {
         CachedRecipe tObject = (CachedRecipe) this.arecipes.get(aRecipeIndex);
         if ((tObject instanceof CachedDefaultRecipe)) {
@@ -211,6 +228,7 @@ public class GT_NEI_AssLineHandler extends TemplateRecipeHandler {
         return currenttip;
     }
 
+    @Override
     public void drawExtras(int aRecipeIndex) {
         int tEUt = ((CachedDefaultRecipe) this.arecipes.get(aRecipeIndex)).mRecipe.mEUt;
         int tDuration = ((CachedDefaultRecipe) this.arecipes.get(aRecipeIndex)).mRecipe.mDuration;
@@ -250,11 +268,13 @@ public class GT_NEI_AssLineHandler extends TemplateRecipeHandler {
     }
 
     public static class GT_RectHandler implements IContainerInputHandler, IContainerTooltipHandler {
+        @Override
         public boolean mouseClicked(GuiContainer gui, int mousex, int mousey, int button) {
 
             return false;
         }
 
+        @Override
         public boolean lastKeyTyped(GuiContainer gui, char keyChar, int keyCode) {
             return false;
         }
@@ -264,6 +284,7 @@ public class GT_NEI_AssLineHandler extends TemplateRecipeHandler {
             //return (((gui instanceof GT_GUIContainer_BasicMachine)) && (GT_Utility.isStringValid(((GT_GUIContainer_BasicMachine) gui).mNEI)));
         }
 
+        @Override
         public List<String> handleTooltip(GuiContainer gui, int mousex, int mousey, List<String> currenttip) {
             return currenttip;
         }
@@ -273,34 +294,43 @@ public class GT_NEI_AssLineHandler extends TemplateRecipeHandler {
 
         }
 
+        @Override
         public List<String> handleItemDisplayName(GuiContainer gui, ItemStack itemstack, List<String> currenttip) {
             return currenttip;
         }
 
+        @Override
         public List<String> handleItemTooltip(GuiContainer gui, ItemStack itemstack, int mousex, int mousey, List<String> currenttip) {
             return currenttip;
         }
 
+        @Override
         public boolean keyTyped(GuiContainer gui, char keyChar, int keyCode) {
             return false;
         }
 
+        @Override
         public void onKeyTyped(GuiContainer gui, char keyChar, int keyID) {
         }
 
+        @Override
         public void onMouseClicked(GuiContainer gui, int mousex, int mousey, int button) {
         }
 
+        @Override
         public void onMouseUp(GuiContainer gui, int mousex, int mousey, int button) {
         }
 
+        @Override
         public boolean mouseScrolled(GuiContainer gui, int mousex, int mousey, int scrolled) {
             return false;
         }
 
+        @Override
         public void onMouseScrolled(GuiContainer gui, int mousex, int mousey, int scrolled) {
         }
 
+        @Override
         public void onMouseDragged(GuiContainer gui, int mousex, int mousey, int button, long heldTime) {
         }
     }
@@ -319,6 +349,7 @@ public class GT_NEI_AssLineHandler extends TemplateRecipeHandler {
             this.mChance = aChance;
         }
 
+        @Override
         public void generatePermutations() {
             if (this.permutated) {
                 return;
@@ -339,7 +370,7 @@ public class GT_NEI_AssLineHandler extends TemplateRecipeHandler {
                             tDisplayStacks.add(base);
                         }
                     } else {
-                        tDisplayStacks.add(GT_Utility.copy(new Object[]{tStack}));
+                        tDisplayStacks.add(GT_Utility.copyOrNull(tStack));
                     }
                 }
             }
@@ -389,14 +420,17 @@ public class GT_NEI_AssLineHandler extends TemplateRecipeHandler {
             }
         }
 
+        @Override
         public List<PositionedStack> getIngredients() {
             return getCycledIngredients(GT_NEI_AssLineHandler.this.cycleticks / 10, this.mInputs);
         }
 
+        @Override
         public PositionedStack getResult() {
             return null;
         }
 
+        @Override
         public List<PositionedStack> getOtherStacks() {
             return this.mOutputs;
         }

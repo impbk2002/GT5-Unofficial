@@ -22,7 +22,6 @@
 
 package gregtech.common.tileentities.machines.long_distance;
 
-import gregtech.GT_Mod;
 import gregtech.api.GregTech_API;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -157,7 +156,6 @@ public abstract class GT_MetaTileEntity_LongDistancePipelineBase extends GT_Meta
     
     protected void scanPipes() {
         if (mSender != null && !mSender.isDead() && mSender.mTarget == this) return;
-        GT_Mod.GT_FML_LOGGER.info("ScanPipes()");
         
         // Check if we need to scan anything
         final IGregTechTileEntity gtTile = getBaseMetaTileEntity();

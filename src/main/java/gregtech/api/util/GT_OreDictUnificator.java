@@ -14,10 +14,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
-import static gregtech.api.enums.GT_Values.*;
+import static gregtech.api.enums.GT_Values.E;
+import static gregtech.api.enums.GT_Values.M;
+import static gregtech.api.enums.GT_Values.W;
 
 /**
  * NEVER INCLUDE THIS FILE IN YOUR MOD!!!
@@ -102,13 +108,22 @@ public class GT_OreDictUnificator {
 
     public static ItemStack get(Object aName, ItemStack aReplacement, long aAmount, boolean aMentionPossibleTypos, boolean aNoInvalidAmounts) {
         if (aNoInvalidAmounts && aAmount < 1) return null;
-        if (!sName2StackMap.containsKey(aName.toString()) && aMentionPossibleTypos)
+        final ItemStack stackFromName = sName2StackMap.get(aName.toString());
+        if (stackFromName != null) return GT_Utility.copyAmount(aAmount, stackFromName);
+        if (aMentionPossibleTypos) {
             GT_Log.err.println("Unknown Key for Unification, Typo? " + aName);
-        return GT_Utility.copyAmount(aAmount, sName2StackMap.get(aName.toString()), getFirstOre(aName, aAmount), aReplacement);
+            // Debug callstack of entries not in sName2StackMap
+            // StackTraceElement[] cause = Thread.currentThread().getStackTrace();
+            // GT_Log.err.println(Arrays.toString(cause));
+
+        }
+        final ItemStack stackFirstOre = getFirstOre(aName, aAmount);
+        if (stackFirstOre != null) return GT_Utility.copyAmount(aAmount, stackFirstOre);
+        return GT_Utility.copyAmount(aAmount, aReplacement);
     }
 
     public static ItemStack[] setStackArray(boolean aUseBlackList, ItemStack... aStacks) {
-        for (int i = 0; i < aStacks.length; i++) aStacks[i] = get(aUseBlackList, GT_Utility.copy(aStacks[i]));
+        for (int i = 0; i < aStacks.length; i++) aStacks[i] = get(aUseBlackList, GT_Utility.copyOrNull(aStacks[i]));
         return aStacks;
     }
 
@@ -140,15 +155,15 @@ public class GT_OreDictUnificator {
         ItemData tPrefixMaterial = getAssociation(aStack);
         ItemStack rStack = null;
         if (tPrefixMaterial == null || !tPrefixMaterial.hasValidPrefixMaterialData() || (aUseBlackList && tPrefixMaterial.mBlackListed))
-            return GT_Utility.copy(aStack);
+            return GT_Utility.copyOrNull(aStack);
         if (aUseBlackList && !GregTech_API.sUnificationEntriesRegistered && isBlacklisted(aStack)) {
             tPrefixMaterial.mBlackListed = true;
-            return GT_Utility.copy(aStack);
+            return GT_Utility.copyOrNull(aStack);
         }
         if (tPrefixMaterial.mUnificationTarget == null)
             tPrefixMaterial.mUnificationTarget = sName2StackMap.get(tPrefixMaterial.toString());
         rStack = tPrefixMaterial.mUnificationTarget;
-        if (GT_Utility.isStackInvalid(rStack)) return GT_Utility.copy(aStack);
+        if (GT_Utility.isStackInvalid(rStack)) return GT_Utility.copyOrNull(aStack);
         assert rStack != null;
         rStack.setTagCompound(aStack.getTagCompound());
         return GT_Utility.copyAmount(aStack.stackSize, rStack);
@@ -433,7 +448,6 @@ public class GT_OreDictUnificator {
 
     public static ItemStack getIngotOrDust(MaterialStack aMaterial) {
         ItemStack rStack = getIngot(aMaterial);
-        if(aMaterial!=null&&aMaterial.mMaterial!=null&&(aMaterial.mMaterial==Materials.Naquadah||aMaterial.mMaterial==Materials.NaquadahEnriched))rStack = getDust(aMaterial);
         if (rStack == null) rStack = getDust(aMaterial);
         return rStack;
     }

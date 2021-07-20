@@ -31,7 +31,7 @@ import net.minecraft.client.renderer.Tessellator;
 public class LightingHelper {
     public static final int NORMAL_BRIGHTNESS = 0xff00ff;
     public static final int MAX_BRIGHTNESS = 0xf000f0;
-    public static final float NO_Z_FIGHT_OFFSET = 1.0F / 16384.0F;
+    public static final float NO_Z_FIGHT_OFFSET = 1.0F / 1024.0F;
     protected static final float[] LIGHTNESS = {0.5F, 1.0F, 0.8F, 0.8F, 0.6F, 0.6F};
     private final RenderBlocks renderBlocks;
     /**
@@ -56,6 +56,10 @@ public class LightingHelper {
      */
     public LightingHelper(RenderBlocks renderBlocks) {
         this.renderBlocks = renderBlocks;
+        if (renderBlocks.useInventoryTint) {
+            // Block will be rendered in an inventory, so it needs its lightness maxed
+            setLightnessOverride(1.0F);
+        }
     }
 
     /**

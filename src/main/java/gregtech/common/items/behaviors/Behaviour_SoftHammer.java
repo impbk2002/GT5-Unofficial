@@ -21,6 +21,7 @@ public class Behaviour_SoftHammer extends Behaviour_None {
         this.mCosts = aCosts;
     }
 
+    @Override
     public boolean onItemUseFirst(GT_MetaBase_Item aItem, ItemStack aStack, EntityPlayer aPlayer, World aWorld, int aX, int aY, int aZ, int aSide, float hitX, float hitY, float hitZ) {
         if (aWorld.isRemote) {
             return false;
@@ -88,7 +89,7 @@ public class Behaviour_SoftHammer extends Behaviour_None {
         }
         if (aBlock == Blocks.hopper) {
             if ((aPlayer.capabilities.isCreativeMode) || (((GT_MetaGenerated_Tool) aItem).doDamage(aStack, this.mCosts))) {
-                aWorld.setBlockMetadataWithNotify(aX, aY, aZ, (aMeta + 1) % 6 == 1 ? (aMeta + 1) % 6 : 2, 3);
+                aWorld.setBlockMetadataWithNotify(aX, aY, aZ, (aMeta + 1) % 6 != 1 ? (aMeta + 1) % 6 : 2, 3);
                 GT_Utility.sendSoundToPlayers(aWorld, (String) GregTech_API.sSoundList.get(101), 1.0F, -1.0F, aX, aY, aZ);
             }
             return true;
@@ -96,6 +97,7 @@ public class Behaviour_SoftHammer extends Behaviour_None {
         return false;
     }
 
+    @Override
     public List<String> getAdditionalToolTips(GT_MetaBase_Item aItem, List<String> aList, ItemStack aStack) {
         aList.add(this.mTooltip);
         return aList;

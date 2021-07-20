@@ -13,6 +13,7 @@ public class ProcessingBlock implements gregtech.api.interfaces.IOreRecipeRegist
         OrePrefixes.block.add(this);
     }
 
+    @Override
     public void registerOre(OrePrefixes aPrefix, Materials aMaterial, String aOreDictName, String aModName, ItemStack aStack) {
         GT_Values.RA.addCutterRecipe(GT_Utility.copyAmount(1L, aStack), GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial, 9L), null, (int) Math.max(aMaterial.getMass() * 10L, 1L), 30);
         ItemStack bStack = (GT_OreDictUnificator.get(OrePrefixes.block, aMaterial, 1L) != GT_Values.NI) ? GT_OreDictUnificator.get(OrePrefixes.block, aMaterial, 1L) : GT_Utility.copyAmount(1L, aStack);
@@ -46,11 +47,12 @@ public class ProcessingBlock implements gregtech.api.interfaces.IOreRecipeRegist
                 GT_ModHandler.addCraftingRecipe(bStack, RecipeBits.NOT_REMOVABLE|RecipeBits.BUFFERED, new Object[]{"XXX", "XXX", "XXX", 'X', OrePrefixes.ingot.get(aMaterial)});
             }
         }
-        if (tStack1 != null) tStack1.stackSize = 9;
-        if (tStack2 != null) tStack2.stackSize = 9;
-        if (tStack3 != null) {
+        if (tStack1 != null)
+        	tStack1.stackSize = 9;
+        if (tStack2 != null)
+        	tStack2.stackSize = 9;
+        if (tStack3 != null)
             tStack3.stackSize = 9;
-        }
         GT_Values.RA.addForgeHammerRecipe(aStack, tStack2, 100, 24);
 
         if (GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.storageblockdecrafting, OrePrefixes.block.get(aMaterial).toString(), true)) {
