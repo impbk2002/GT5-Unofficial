@@ -503,7 +503,7 @@ public abstract class MetaPipeEntity implements IMetaTileEntity, IConnectable {
 
     @Override
     public ItemStack decrStackSize(int aIndex, int aAmount) {
-        ItemStack tStack = getStackInSlot(aIndex), rStack = GT_Utility.copy(tStack);
+        ItemStack tStack = getStackInSlot(aIndex), rStack = GT_Utility.copyOrNull(tStack);
         if (tStack != null) {
             if (tStack.stackSize <= aAmount) {
                 if (setStackToZeroInsteadOfNull(aIndex)) tStack.stackSize = 0;
@@ -847,7 +847,8 @@ public abstract class MetaPipeEntity implements IMetaTileEntity, IConnectable {
 			((MetaPipeEntity) tPipe).disconnect(tSide);
 	}
 
-	public boolean isConnectedAtSide(int aSide) {
+	@Override
+    public boolean isConnectedAtSide(int aSide) {
 		return (mConnections & (1 << aSide)) != 0;
 	}
 
@@ -858,6 +859,7 @@ public abstract class MetaPipeEntity implements IMetaTileEntity, IConnectable {
 	public boolean canConnect(byte aSide, TileEntity tTileEntity) { return false; }
 	public boolean getGT6StyleConnection() { return false; }
 
+    @Override
     public boolean shouldJoinIc2Enet() { return false; }
 
     @Override

@@ -63,6 +63,7 @@ public abstract class MetaTileEntity implements IMetaTileEntity {
     public final ItemStack[] mInventory;
     public boolean doTickProfilingInThisTick = true;
 
+
     /**
      * accessibility to this Field is no longer given, see below
      */
@@ -695,7 +696,7 @@ public abstract class MetaTileEntity implements IMetaTileEntity {
 
     @Override
     public ItemStack decrStackSize(int aIndex, int aAmount) {
-        ItemStack tStack = getStackInSlot(aIndex), rStack = GT_Utility.copy(tStack);
+        ItemStack tStack = getStackInSlot(aIndex), rStack = GT_Utility.copyOrNull(tStack);
         if (tStack != null) {
             if (tStack.stackSize <= aAmount) {
                 if (setStackToZeroInsteadOfNull(aIndex)) tStack.stackSize = 0;
@@ -958,6 +959,7 @@ public abstract class MetaTileEntity implements IMetaTileEntity {
     	return "";
     }
 
+    @Override
     public boolean shouldJoinIc2Enet() { return false; }
     
     public boolean shouldTriggerBlockUpdate() { return false; }

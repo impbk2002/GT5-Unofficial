@@ -1,17 +1,24 @@
 package gregtech.api.metatileentity.implementations;
 
-import gregtech.api.enums.Textures;
-import gregtech.api.gui.*;
+import gregtech.api.gui.GT_Container_1by1;
+import gregtech.api.gui.GT_Container_2by2;
+import gregtech.api.gui.GT_Container_3by3;
+import gregtech.api.gui.GT_Container_4by4;
+import gregtech.api.gui.GT_GUIContainer_1by1;
+import gregtech.api.gui.GT_GUIContainer_2by2;
+import gregtech.api.gui.GT_GUIContainer_3by3;
+import gregtech.api.gui.GT_GUIContainer_4by4;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
-import gregtech.api.objects.GT_RenderedTexture;
+import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GT_Utility;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_PIPE_OUT;
 import static gregtech.api.util.GT_Utility.moveMultipleItemStacks;
 
 public class GT_MetaTileEntity_Hatch_OutputBus extends GT_MetaTileEntity_Hatch {
@@ -42,12 +49,12 @@ public class GT_MetaTileEntity_Hatch_OutputBus extends GT_MetaTileEntity_Hatch {
 
     @Override
     public ITexture[] getTexturesActive(ITexture aBaseTexture) {
-        return new ITexture[]{aBaseTexture, new GT_RenderedTexture(Textures.BlockIcons.OVERLAY_PIPE_OUT)};
+        return new ITexture[]{aBaseTexture, TextureFactory.of(OVERLAY_PIPE_OUT)};
     }
 
     @Override
     public ITexture[] getTexturesInactive(ITexture aBaseTexture) {
-        return new ITexture[]{aBaseTexture, new GT_RenderedTexture(Textures.BlockIcons.OVERLAY_PIPE_OUT)};
+        return new ITexture[]{aBaseTexture, TextureFactory.of(OVERLAY_PIPE_OUT)};
     }
 
     @Override
@@ -119,7 +126,7 @@ public class GT_MetaTileEntity_Hatch_OutputBus extends GT_MetaTileEntity_Hatch {
      * @return true if stack is fully accepted. false is stack is partially accepted or nothing is accepted
      */
     public boolean storeAll(ItemStack aStack) {
-        for (int i = 0, mInventoryLength = mInventory.length; i < mInventoryLength; i++) {
+        for (int i = 0, mInventoryLength = mInventory.length; i < mInventoryLength && aStack.stackSize > 0; i++) {
             ItemStack tSlot = mInventory[i];
             if (GT_Utility.isStackInvalid(tSlot)) {
                 if (aStack.stackSize <= getInventoryStackLimit()) {
@@ -163,7 +170,8 @@ public class GT_MetaTileEntity_Hatch_OutputBus extends GT_MetaTileEntity_Hatch {
             IInventory tTileEntity =aBaseMetaTileEntity.getIInventoryAtSide(aBaseMetaTileEntity.getFrontFacing());
             if(tTileEntity!=null){
                 moveMultipleItemStacks(aBaseMetaTileEntity,tTileEntity,aBaseMetaTileEntity.getFrontFacing(),aBaseMetaTileEntity.getBackFacing(),null,false,(byte)64,(byte)1,(byte)64,(byte)1,mInventory.length);
-
+                for (int i = 0; i < mInventory.length; i++)
+                    if (mInventory[i] != null && mInventory[i].stackSize <= 0) mInventory[i] = null;
 //                GT_Utility.moveOneItemStack(aBaseMetaTileEntity, tTileEntity,
 //                        aBaseMetaTileEntity.getFrontFacing(), aBaseMetaTileEntity.getBackFacing(),
 //                        null, false, (byte) 64, (byte) 1, (byte)( 64 * aBaseMetaTileEntity.getSizeInventory()), (byte) 1);

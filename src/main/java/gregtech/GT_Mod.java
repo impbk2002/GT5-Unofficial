@@ -267,6 +267,7 @@ public class GT_Mod implements IGT_Mod {
         GT_Values.D1 = tMainConfig.get(aTextGeneral, "Debug", false).getBoolean(false);
         GT_Values.D2 = tMainConfig.get(aTextGeneral, "Debug2", false).getBoolean(false);
         GT_Values.hideAssLineRecipes = tMainConfig.get(aTextGeneral, "hide assline recipes", false).getBoolean(false);
+        GT_Values.updateFluidDisplayItems = tMainConfig.get(aTextGeneral, "update fluid display items", true).getBoolean(true);
         GT_Values.allow_broken_recipemap = tMainConfig.get(aTextGeneral, "debug allow broken recipemap", false).getBoolean(false);
         GT_Values.debugCleanroom = tMainConfig.get(aTextGeneral, "debugCleanroom", false).getBoolean(false);
         GT_Values.debugDriller = tMainConfig.get(aTextGeneral, "debugDriller", false).getBoolean(false);
@@ -309,6 +310,7 @@ public class GT_Mod implements IGT_Mod {
         GregTech_API.sMachineThunderExplosions = tMainConfig.get("machines", "lightning_causes_explosions", true).getBoolean(false);
         GregTech_API.sConstantEnergy = tMainConfig.get("machines", "constant_need_of_energy", true).getBoolean(false);
         GregTech_API.sColoredGUI = tMainConfig.get("machines", "colored_guis_when_painted", true).getBoolean(false);
+        GregTech_API.sMachineMetalGUI = tMainConfig.get("machines", "guis_in_consistent_machine_metal_color", false).getBoolean(false);
 
         // Implementation for this is actually handled in NewHorizonsCoreMod in MainRegistry.java!
         GregTech_API.sUseMachineMetal = tMainConfig.get("machines", "use_machine_metal_tint", true).getBoolean(true);
@@ -326,6 +328,7 @@ public class GT_Mod implements IGT_Mod {
                 }
         );
         gregtechproxy.mRenderTileAmbientOcclusion = GregTech_API.sClientDataFile.get("render", "TileAmbientOcclusion", true);
+        gregtechproxy.mRenderGlowTextures = GregTech_API.sClientDataFile.get("render", "GlowTextures", true);
 
         gregtechproxy.mMaxEqualEntitiesAtOneSpot = tMainConfig.get(aTextGeneral, "MaxEqualEntitiesAtOneSpot", 3).getInt(3);
         gregtechproxy.mSkeletonsShootGTArrows = tMainConfig.get(aTextGeneral, "SkeletonsShootGTArrows", 16).getInt(16);
@@ -835,6 +838,12 @@ public class GT_Mod implements IGT_Mod {
 
         stopwatch.reset();
         stopwatch.start();
+        // remove gemIridium exploit
+        ItemStack iridiumOre = GT_ModHandler.getIC2Item("iridiumOre", 1);
+        aCompressorRecipeList.entrySet().parallelStream()
+                .filter(e -> e.getKey().getInputs().size() == 1 && e.getKey().getInputs().get(0).isItemEqual(iridiumOre))
+                .findAny()
+                .ifPresent(e -> aCompressorRecipeList.remove(e.getKey()));
         //Add default IC2 recipe to GT
         GT_ModHandler.addIC2RecipesToGT(aMaceratorRecipeList, GT_Recipe.GT_Recipe_Map.sMaceratorRecipes, true, true, true);
         GT_ModHandler.addIC2RecipesToGT(aCompressorRecipeList, GT_Recipe.GT_Recipe_Map.sCompressorRecipes, true, true, true);
